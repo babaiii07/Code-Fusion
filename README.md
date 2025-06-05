@@ -20,12 +20,12 @@ Experience CodeFusion in action: [https://code-fusion-parthib.onrender.com](http
 
 ## ✨ Features
 
-- ⚡ **AI-Powered Coding**: Generate and edit code with the help of advanced AI models.
+- ⚡ **AI-Powered Coding**: Generate and edit code with the help of advanced AI models(DeepSeek-V3-0324).
 - 🖥️ **Live Preview**: Instantly see your changes with a real-time preview panel.
 - 🧩 **No Setup Required**: Start building immediately—no installs, no config.
 - ☁️ **Deploy in One Click**: (Feature coming soon) Deploy your project to the cloud with a single click.
 - 🎨 **Beautiful UI**: Modern, responsive, and user-friendly interface.
-- 🔒 **Secure**: OAuth login with Hugging Face for safe authentication.
+- 🔒 **Secure**: (Feature coming soon) OAuth login with Hugging Face for safe authentication.
 
 ---
 
@@ -35,48 +35,14 @@ Experience CodeFusion in action: [https://code-fusion-parthib.onrender.com](http
 
 | Editor & Preview | AI Assistant |
 |-----------------|-------------|
-| ![Editor Screenshot](./screenshots/editor.png) | ![AI Screenshot](./screenshots/ai.png) |
-
----
-
-## 🛠️ Quick Start
-
-```bash
-# 1. Clone the repository
-$ git clone https://github.com/yourusername/codefusion.git
-$ cd codefusion
-
-# 2. Install dependencies
-$ npm install
-
-# 3. Start the development server
-$ npm run dev
-
-# 4. Open in your browser
-# Visit http://localhost:5173
-```
-
----
-
-## 🌐 Deployment
-
-### Deploy to Render
-1. Fork this repo and push to your GitHub.
-2. Go to [Render](https://render.com/), create a new Web Service, and connect your repo.
-3. Set the build command to `npm run build` and the start command to `npm start`.
-4. Set the environment variable `APP_PORT=5173` (or your preferred port).
-5. Click **Deploy** and your app will be live!
-
-### Deploy to Vercel/Netlify
-- **Vercel**: Import your repo, set build command to `npm run build`, output directory to `dist`.
-- **Netlify**: Import your repo, set build command to `npm run build`, publish directory to `dist`.
+| ![Editor Screenshot](./screenshots/editor.png) | ![AI Screenshot](image.png) |
 
 ---
 
 ## 👤 Owner / Credits
 
-- **Your Name**  
-  [![GitHub](https://img.shields.io/badge/GitHub-Profile-black?logo=github&style=flat-square)](https://github.com/yourusername)
+- **Parthib Karak**  
+  [![GitHub](https://img.shields.io/badge/GitHub-Profile-black?logo=github&style=flat-square)](https://github.com/babaiii07)
 
 ---
 
