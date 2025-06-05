@@ -31,15 +31,13 @@ Experience CodeFusion in action: [https://code-fusion-parthib.onrender.com](http
 
 ## 🖼️ Screenshots
 
-> _Add your screenshots here!_
-
-| Editor & Preview | AI Assistant |
-|-----------------|-------------|
-| ![Editor Screenshot](./screenshots/editor.png) | ![AI Screenshot](image.png) |
+| AI Assistant |
+|-------------|
+| ![AI Screenshot](image.png) |
 
 ---
 
-## 👤 Owner / Credits
+## 👤 Owner
 
 - **Parthib Karak**  
   [![GitHub](https://img.shields.io/badge/GitHub-Profile-black?logo=github&style=flat-square)](https://github.com/babaiii07)
