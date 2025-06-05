@@ -1,4 +1,4 @@
-# <img src="(https://github.com/Babaiii07/Code-Fusion/blob/main/public/logo.svg)" alt="CodeFusion Logo" width="40" style="vertical-align:middle;"/> CodeFusion
+# <img src="[(https://github.com/Babaiii07/Code-Fusion/blob/main/public/logo.svg)]" alt="CodeFusion Logo" width="40" style="vertical-align:middle;"/> CodeFusion
 
 [![Live Demo](https://img.shields.io/badge/Live-Demo-green?style=for-the-badge&logo=vercel)](https://code-fusion-parthib.onrender.com)
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
