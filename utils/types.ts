@@ -4,3 +4,9 @@ export interface Auth {
   name: string;
   isLocalUse?: boolean;
 }
+
+export interface HtmlHistory {
+  html: string;
+  createdAt: Date;
+  prompt: string;
+}

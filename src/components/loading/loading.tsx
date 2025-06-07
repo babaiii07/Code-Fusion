@@ -1,8 +1,21 @@
-function Loading() {
+import classNames from "classnames";
+
+function Loading({
+  overlay = true,
+  className,
+}: {
+  overlay?: boolean;
+  className?: string;
+}) {
   return (
-    <div className="absolute left-0 top-0 h-full w-full flex items-center justify-center bg-white/30 z-20">
+    <div
+      className={classNames("", {
+        "absolute left-0 top-0 h-full w-full flex items-center justify-center z-20 bg-black/50 rounded-full":
+          overlay,
+      })}
+    >
       <svg
-        className="size-5 animate-spin text-white"
+        className={`size-5 animate-spin text-white ${className}`}
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"

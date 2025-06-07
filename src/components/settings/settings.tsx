@@ -1,136 +1,195 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import classNames from "classnames";
-
 import { PiGearSixFill } from "react-icons/pi";
+import { RiCheckboxCircleFill } from "react-icons/ri";
+
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 // @ts-expect-error not needed
-import { PROVIDERS } from "./../../../utils/providers";
+import { PROVIDERS, MODELS } from "./../../../utils/providers";
+import { Button } from "../ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+import { useMemo } from "react";
+import { useUpdateEffect } from "react-use";
 
 function Settings({
   open,
   onClose,
   provider,
+  model,
   error,
   onChange,
+  onModelChange,
 }: {
   open: boolean;
   provider: string;
+  model: string;
   error?: string;
   onClose: React.Dispatch<React.SetStateAction<boolean>>;
   onChange: (provider: string) => void;
+  onModelChange: (model: string) => void;
 }) {
+  const modelAvailableProviders = useMemo(() => {
+    const availableProviders = MODELS.find(
+      (m: { value: string }) => m.value === model
+    )?.providers;
+    if (!availableProviders) return Object.keys(PROVIDERS);
+    return Object.keys(PROVIDERS).filter((id) =>
+      availableProviders.includes(id)
+    );
+  }, [model]);
+
+  useUpdateEffect(() => {
+    if (provider !== "auto" && !modelAvailableProviders.includes(provider)) {
+      onChange("auto");
+    }
+  }, [model, provider]);
+
   return (
     <div className="">
-      <button
-        className="relative overflow-hidden cursor-pointer flex-none flex items-center justify-center rounded-full text-base font-semibold size-8 text-center bg-gray-800 hover:bg-gray-700 text-gray-100 shadow-sm dark:shadow-highlight/20"
-        onClick={() => {
-          onClose((prev) => !prev);
-        }}
-      >
-        <PiGearSixFill />
-      </button>
-      <div
-        className={classNames(
-          "h-screen w-screen bg-black/20 fixed left-0 top-0 z-40",
-          {
-            "opacity-0 pointer-events-none": !open,
-          }
-        )}
-        onClick={() => onClose(false)}
-      ></div>
-      <div
-        className={classNames(
-          "absolute top-0 -translate-y-[calc(100%+16px)] right-0 z-40 w-96 bg-white border border-gray-200 rounded-lg shadow-lg transition-all duration-75 overflow-hidden",
-          {
-            "opacity-0 pointer-events-none": !open,
-          }
-        )}
-      >
-        <header className="flex items-center text-sm px-4 py-2 border-b border-gray-200 gap-2 bg-gray-100 font-semibold text-gray-700">
-          <span className="text-xs bg-blue-500/10 text-blue-500 rounded-full pl-1.5 pr-2.5 py-0.5 flex items-center justify-start gap-1.5">
-            Provider
-          </span>
-          Customize Settings
-        </header>
-        <main className="px-4 pt-3 pb-4 space-y-4">
-          {/* toggle using tailwind css */}
-          <div>
+      <Popover open={open} onOpenChange={onClose}>
+        <PopoverTrigger asChild>
+          <Button variant="gray" size="sm">
+            <PiGearSixFill className="size-4" />
+            Settings
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent
+          className="!rounded-2xl p-0 !w-96 overflow-hidden !bg-neutral-900"
+          align="center"
+        >
+          <header className="flex items-center text-sm px-4 py-3 border-b gap-2 bg-neutral-950 border-neutral-800 font-semibold text-neutral-200">
+            {/* <span className="text-xs bg-blue-500 text-white rounded-full px-1.5 py-0.5">
+              Provider
+            </span> */}
+            Customize Settings
+          </header>
+          <main className="px-4 pt-5 pb-6 space-y-5">
             <a
-              href="https://huggingface.co/spaces/enzostvs/codefusion/discussions/74"
+              href="https://huggingface.co/spaces/parthib/codefusion/discussions/74"
               target="_blank"
-              className="w-full flex items-center justify-between text-gray-600 bg-gray-50 border border-gray-100 px-2 py-2 rounded-lg mb-3 text-sm font-medium hover:brightness-95"
+              className="w-full flex items-center justify-between text-neutral-300 bg-neutral-300/15 border border-neutral-300/15 pl-4 p-1.5 rounded-full text-sm font-medium hover:brightness-95"
             >
               How to use it locally?
-              <button className="bg-black text-white rounded-md px-3 py-1.5 text-xs font-semibold cursor-pointer">
-                See the guide
-              </button>
+              <Button size="xs">See guide</Button>
             </a>
-            <div className="flex items-center justify-between">
-              <p className="text-gray-800 text-sm font-medium flex items-center justify-between">
-                Use auto-provider
+            {error !== "" && (
+              <p className="text-red-500 text-sm font-medium mb-2 flex items-center justify-between bg-red-500/10 p-2 rounded-md">
+                {error}
               </p>
-              <div
-                className={classNames(
-                  "bg-gray-200 rounded-full w-10 h-6 flex items-center justify-between p-1 cursor-pointer transition-all duration-200",
-                  {
-                    "!bg-blue-500": provider === "auto",
-                  }
-                )}
-                onClick={() => {
-                  onChange(provider === "auto" ? "fireworks-ai" : "auto");
-                }}
-              >
+            )}
+            <label className="block">
+              <p className="text-neutral-300 text-sm mb-2.5">
+                Choose a DeepSeek model
+              </p>
+              <Select defaultValue={model} onValueChange={onModelChange}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select a DeepSeek model" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>DeepSeek models</SelectLabel>
+                    {MODELS.map(
+                      ({
+                        value,
+                        label,
+                        isNew = false,
+                      }: {
+                        value: string;
+                        label: string;
+                        isNew?: boolean;
+                      }) => (
+                        <SelectItem key={value} value={value} className="">
+                          {label}
+                          {isNew && (
+                            <span className="text-xs bg-gradient-to-br from-sky-400 to-sky-600 text-white rounded-full px-1.5 py-0.5">
+                              New
+                            </span>
+                          )}
+                        </SelectItem>
+                      )
+                    )}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </label>
+            <div className="flex flex-col gap-3">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-neutral-300 text-sm mb-1.5">
+                    Use auto-provider
+                  </p>
+                  <p className="text-xs text-neutral-400/70">
+                    We'll automatically select the best provider for you based
+                    on your prompt.
+                  </p>
+                </div>
                 <div
                   className={classNames(
-                    "w-4 h-4 rounded-full shadow-md transition-all duration-200 bg-white",
+                    "bg-neutral-700 rounded-full min-w-10 w-10 h-6 flex items-center justify-between p-1 cursor-pointer transition-all duration-200",
                     {
-                      "translate-x-4": provider === "auto",
-                    }
-                  )}
-                />
-              </div>
-            </div>
-            <p className="text-xs text-gray-500 mt-2">
-              We'll automatically select the best provider for you based on your
-              prompt.
-            </p>
-          </div>
-          {error !== "" && (
-            <p className="text-red-500 text-sm font-medium mb-2 flex items-center justify-between bg-red-500/10 p-2 rounded-md">
-              {error}
-            </p>
-          )}
-          <label className="block">
-            <p className="text-gray-800 text-sm font-medium mb-2 flex items-center justify-between">
-              Inference Provider
-            </p>
-            <div className="grid grid-cols-2 gap-1.5">
-              {Object.keys(PROVIDERS).map((id: string) => (
-                <div
-                  key={id}
-                  className={classNames(
-                    "text-gray-600 text-sm font-medium cursor-pointer border p-2 rounded-md flex items-center justify-start gap-2",
-                    {
-                      "bg-blue-500/10 border-blue-500/15 text-blue-500":
-                        id === provider,
-                      "hover:bg-gray-100 border-gray-100": id !== provider,
+                      "!bg-sky-500": provider === "auto",
                     }
                   )}
                   onClick={() => {
-                    onChange(id);
+                    const foundModel = MODELS.find(
+                      (m: { value: string }) => m.value === model
+                    );
+                    if (provider === "auto") {
+                      onChange(foundModel.autoProvider);
+                    } else {
+                      onChange("auto");
+                    }
                   }}
                 >
-                  <img
-                    src={`/providers/${id}.svg`}
-                    alt={PROVIDERS[id].name}
-                    className="size-5"
+                  <div
+                    className={classNames(
+                      "w-4 h-4 rounded-full shadow-md transition-all duration-200 bg-neutral-200",
+                      {
+                        "translate-x-4": provider === "auto",
+                      }
+                    )}
                   />
-                  {PROVIDERS[id].name}
                 </div>
-              ))}
+              </div>
+              <label className="block">
+                <p className="text-neutral-300 text-sm mb-2">
+                  Inference Provider
+                </p>
+                <div className="grid grid-cols-2 gap-1.5">
+                  {modelAvailableProviders.map((id: string) => (
+                    <Button
+                      key={id}
+                      variant={id === provider ? "default" : "secondary"}
+                      size="sm"
+                      onClick={() => {
+                        onChange(id);
+                      }}
+                    >
+                      <img
+                        src={`/providers/${id}.svg`}
+                        alt={PROVIDERS[id].name}
+                        className="size-5 mr-2"
+                      />
+                      {PROVIDERS[id].name}
+                      {id === provider && (
+                        <RiCheckboxCircleFill className="ml-2 size-4 text-blue-500" />
+                      )}
+                    </Button>
+                  ))}
+                </div>
+              </label>
             </div>
-          </label>
-        </main>
-      </div>
+          </main>
+        </PopoverContent>
+      </Popover>
     </div>
   );
 }
