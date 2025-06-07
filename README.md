@@ -1,4 +1,4 @@
-# <img src="https://codefusion-assets.hf.space/logo.svg" alt="CodeFusion Logo" width="40" style="vertical-align:middle;"/> CodeFusion
+# <img src="https://raw.githubusercontent.com/Babaiii07/Code-Fusion/main/public/logo.svg" alt="CodeFusion Logo" width="40" style="vertical-align:middle;"/> CodeFusion
 
 [![Live Demo](https://img.shields.io/badge/Live-Demo-green?style=for-the-badge&logo=vercel)](https://code-fusion-parthib.onrender.com)
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
@@ -31,15 +31,13 @@ Experience CodeFusion in action: [https://code-fusion-parthib.onrender.com](http
 
 ## 🖼️ Screenshots
 
-> _Add your screenshots here!_
-
-| Editor & Preview | AI Assistant |
-|-----------------|-------------|
-| ![Editor Screenshot](./screenshots/editor.png) | ![AI Screenshot](image.png) |
+| AI Assistant |
+|-------------|
+| ![AI Screenshot](image.png) |
 
 ---
 
-## 👤 Owner / Credits
+## 👤 Owner
 
 - **Parthib Karak**  
   [![GitHub](https://img.shields.io/badge/GitHub-Profile-black?logo=github&style=flat-square)](https://github.com/babaiii07)
